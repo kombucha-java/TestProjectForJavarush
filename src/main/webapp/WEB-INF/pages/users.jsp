@@ -25,7 +25,33 @@
                value="<spring:message text="Find users"/>"/>
     </form:form>
 </c:if>
+<c:url value="/users/1" var="firstPage"/>
+<c:url value="/users/${totalPages}" var="lastPage"/>
+<c:url value="/users/${currentPage - 1}" var="prevPage"/>
+<c:url value="/users/${currentPage + 1}" var="nextPage"/>
+
 <c:if test="${!empty listUsers}">
+    <ul>
+        <c:if test="${!(currentPage == 1)}">
+            <li class="disabled"><a href="${firstPage}">&lt;&lt;</a></li>
+            <li class="disabled"><a href="${prevPage}">&lt;</a></li>
+        </c:if>
+        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+            <c:url var="pageUrl" value="/users/${i}"/>
+            <c:choose>
+                <c:when test="${i == currentPage}">
+                    <li class="active"><a href="${pageUrl}"><c:out value="${i}"/></a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageUrl}"><c:out value="${i}"/></a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${!(currentPage == totalPages)}">
+            <li class="disabled"><a href="${nextPage}">&gt;</a></li>
+            <li class="disabled"><a href="${lastPage}">&gt;&gt;</a></li>
+        </c:if>
+    </ul>
     <table class="tg">
         <tr>
             <th width="60">ID</th>
@@ -49,12 +75,8 @@
         </c:forEach>
     </table>
 </c:if>
-<c:url var="populateDB" value="/populateDB"/>
 <c:if test="${empty listUsers}">
-    <form:form action="${populateDB}" method="get">
-        <input type="submit"
-               value="<spring:message text="Populate DB"/>"/>
-    </form:form>
+    <h1>List is empty</h1>
 </c:if>
 </body>
 </html>

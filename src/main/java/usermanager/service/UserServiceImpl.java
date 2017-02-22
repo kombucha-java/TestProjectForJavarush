@@ -12,6 +12,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Transactional
+    public int getTotalUsers() {
+        return this.userDao.getTotalUsers();
+    }
+
+    @Transactional
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -37,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public List<User> listUsers() {
-        return this.userDao.listUsers();
+    public List<User> listUsers(int page) {
+        return this.userDao.listUsers(page);
     }
 
     @Transactional

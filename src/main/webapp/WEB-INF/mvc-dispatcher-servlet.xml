@@ -26,6 +26,7 @@
     <!-- Database Initialization -->
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:database/initDB.sql"/>
+        <jdbc:script location="classpath:database/populateDB.sql"/>
     </jdbc:initialize-database>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->

@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import usermanager.dao.UserDao;
 import usermanager.model.User;
 import usermanager.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -18,9 +21,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String listUsers(Model model) {
-        model.addAttribute("listUsers", this.userService.listUsers());
+    @RequestMapping(value = "users/{page}", method = RequestMethod.GET)
+    public String listUsers(@PathVariable("page") Integer page, Model model) {
+        if (page == null)
+            page = 1;
+        List<User> userList = this.userService.listUsers(page - 1);
+        int totalUsers = this.userService.getTotalUsers();
+        int totalPages = totalUsers % UserDao.limitResultsPerPage > 0 ? totalUsers / UserDao.limitResultsPerPage + 1 :
+                totalUsers / UserDao.limitResultsPerPage;
+        int startPage = Math.max(1, page - 5);
+        int endPage = Math.min(startPage + 10, totalPages);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("listUsers", userList);
         return "users";
     }
 
@@ -29,14 +44,14 @@ public class UserController {
         if (user.getId() == 0) {
             this.userService.addUser(user);
         } else this.userService.updateUser(user);
-        model.addAttribute("listUsers", this.userService.listUsers());
-        return "redirect:/users";
+        model.addAttribute("listUsers", this.userService.listUsers(0));
+        return "redirect:/users/1";
     }
 
     @RequestMapping("remove/{id}")
     public String removeUser(@PathVariable("id") int id) {
         this.userService.removeUser(id);
-        return "redirect:/users";
+        return "redirect:/users/1";
     }
 
     @RequestMapping("edit/{id}")
@@ -51,12 +66,12 @@ public class UserController {
         return "userdata";
     }
 
-    @RequestMapping("populateDB")
+    /*@RequestMapping("populateDB")
     public String populateDB(Model model) {
         this.userService.populateDB();
-        model.addAttribute("listUsers", this.userService.listUsers());
+        model.addAttribute("listUsers", this.userService.listUsers(0));
         return "/users";
-    }
+    }*/
 
     @RequestMapping("findusers")
     public String findUsers(@RequestParam("searchKeyword") String searchKeyword, Model model) {

@@ -9,7 +9,7 @@
 <body>
 <h3>mvadmin presents</h3>
 <br/>
-<a href="<c:url value="/users"/>">Users list</a>
+<a href="<c:url value="/users/1"/>">Users list</a>
 <br/>
 </body>
 </html>

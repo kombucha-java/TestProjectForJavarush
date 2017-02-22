@@ -16,9 +16,11 @@ public interface UserService {
 
     User getUserById(int id);
 
-    List<User> listUsers();
+    List<User> listUsers(int page);
 
     void populateDB();
 
     List<User> findUsers(String searchKeyword);
+
+    int getTotalUsers();
 }

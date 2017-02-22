@@ -1,23 +1,27 @@
 package usermanager.dao;
 
 import org.hibernate.Query;
-import usermanager.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import usermanager.model.User;
 
-import javax.annotation.PostConstruct;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
-
-import static org.hibernate.internal.util.ConfigHelper.getResourceAsStream;
 
 @Repository
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     private SessionFactory sessionFactory;
+    private int totalUsers;
+
+    public int getTotalUsers() {
+        return totalUsers;
+    }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -52,9 +56,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
+    public List<User> listUsers(int page) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> userList = session.createQuery("from User").list();
+        Query query = session.createQuery("from User");
+        totalUsers = query.list().size();
+        query.setFirstResult(page * limitResultsPerPage);
+        query.setMaxResults(limitResultsPerPage);
+        List<User> userList = query.list();
         for (User user : userList) {
             logger.info("User list: " + user);
         }
