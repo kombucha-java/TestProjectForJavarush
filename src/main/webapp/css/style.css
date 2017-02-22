@@ -110,16 +110,19 @@ img {
 }
 
 /* --------------- /базовые настройки ---------*/
+
+ul.paging li{
+    display: inline;
+}
 header {
-    /*background:url(images/header-bg.jpg) center center no-repeat;*/
-    color: #ff7410;
+    color: #1830ff;
     text-align: center;
     background-size: cover;
     padding: 135px 20px 90px 20px;
 }
 
 body > h1 {
-    font-size: 3.75em;
+    font-size: 1.75em;
     font-family: 'Raleway', sans-serif;
     margin-bottom: 25px;
 }

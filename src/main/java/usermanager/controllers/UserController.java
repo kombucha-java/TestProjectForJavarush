@@ -66,13 +66,6 @@ public class UserController {
         return "userdata";
     }
 
-    /*@RequestMapping("populateDB")
-    public String populateDB(Model model) {
-        this.userService.populateDB();
-        model.addAttribute("listUsers", this.userService.listUsers(0));
-        return "/users";
-    }*/
-
     @RequestMapping("findusers")
     public String findUsers(@RequestParam("searchKeyword") String searchKeyword, Model model) {
         model.addAttribute("listUsers", this.userService.findUsers(searchKeyword));

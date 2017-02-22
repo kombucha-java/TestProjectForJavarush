@@ -8,7 +8,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,700|Raleway:200,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css"/> "/>
-    <title>User Manager for JavaRush</title>
+    <title>User List page ${currentPage}</title>
 </head>
 <body>
 <a href="../../index.jsp">Back to main menu</a>
@@ -16,7 +16,7 @@
 <br/>
 <br/>
 <h1><a href="<c:url value="/adduser"/>">Add User</a></h1>
-<h1>User list</h1>
+<h1>User list page ${currentPage}</h1>
 <c:url var="findUsers" value="/findusers"/>
 <c:if test="${!empty listUsers}">
     <form:form action="${findUsers}" method="get">
@@ -31,7 +31,7 @@
 <c:url value="/users/${currentPage + 1}" var="nextPage"/>
 
 <c:if test="${!empty listUsers}">
-    <ul>
+    <ul class="paging">
         <c:if test="${!(currentPage == 1)}">
             <li class="disabled"><a href="${firstPage}">&lt;&lt;</a></li>
             <li class="disabled"><a href="${prevPage}">&lt;</a></li>
