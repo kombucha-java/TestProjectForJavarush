@@ -69,6 +69,7 @@ public class UserController {
     @RequestMapping("findusers")
     public String findUsers(@RequestParam("searchKeyword") String searchKeyword, Model model) {
         model.addAttribute("listUsers", this.userService.findUsers(searchKeyword));
+        model.addAttribute("currentPage", 1);
         return "/users";
     }
 }

@@ -84,7 +84,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> findUsers(String searchKeyword) {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("from User u where u.name like :userName");
-        List<User> userList = query.setString("userName", "%" + searchKeyword + "%").list();
+        List<User> userList = query.setString("userName", searchKeyword + "%").list();
         return userList;
     }
 }

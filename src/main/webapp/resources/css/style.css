@@ -254,6 +254,15 @@ th {
     margin: auto;
 }
 
+.editinput:focus {
+    font-weight: 400;
+    background-color: #feff9a;
+}
+.wrapper h1{
+    font-weight: 900;
+    font-size: 2.75em;
+    vertical-align: top;
+}
 @media screen and (max-width: 955px) {
     .maintable input[type="text"], input[type="email"] {
         width: 260px;

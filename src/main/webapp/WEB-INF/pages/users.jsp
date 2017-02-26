@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900|Nunito+Sans:400,700,900"
           rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/> "/>
-    <title>User List page ${currentPage}</title>
+    <title>User Manager for Javarush internship</title>
 </head>
 <body>
 <header>
@@ -18,12 +18,11 @@
 <div class="wrapper">
     <div class="buttonblock">
         <c:url var="findUsers" value="/findusers"/>
-        <c:if test="${!empty listUsers}">
-            <form:form action="${findUsers}" method="get">
-                <input type="text" name="searchKeyword" value="Enter user's name"/>
-                <button type="submit">Find users</button>
-            </form:form>
-        </c:if>
+        <form:form action="${findUsers}" method="get">
+            <input type="text" name="searchKeyword" placeholder="Enter user's name" class="editinput"/>
+            <button type="submit">Find users</button>
+        </form:form>
+
         <form action="/adduser">
             <button type="submit">Add user</button>
         </form>
