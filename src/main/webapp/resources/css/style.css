@@ -67,17 +67,26 @@ html {
 }
 
 body {
-    color: #404040;
+    color: #000000;
     text-align: left;
     font-size: 1em; /* используем безопасные шрифтовые CSS стеки */
     min-height: 100%;
     background: #f9f9f9;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a, a:visited { /* порядок правил для ссылок имеет значение */
-    color: #e6618c;
-    text-decoration: underline;
+    margin: 5px auto;
+    width: 20px;
+    font-size: 1.25em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #f9f9f9;
+    background-color: #000000;
+    border: 0;
+    border-radius: 2px;
+    justify-content: center;
+    text-decoration: none;
 }
 
 a:hover {
@@ -86,12 +95,11 @@ a:hover {
 }
 
 a:focus, a:active {
-    color: #c83867;
-    text-decoration: underline;
+    color: #000000;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 img {
@@ -110,101 +118,150 @@ img {
 }
 
 /* --------------- /базовые настройки ---------*/
-
-ul.paging li{
-    display: inline;
-}
 header {
-    color: #1830ff;
+    color: #000000;
     text-align: center;
     background-size: cover;
-    padding: 135px 20px 90px 20px;
+    padding: 20px;
+    font-size: 2.25em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    background-color: #f9f9f9;
+}
+
+footer > p {
+    font-size: 0.5em;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.20);
+}
+
+.headstring {
+    background-color: rgba(0, 0, 0, 0.20);
+    padding: 20px;
 }
 
 body > h1 {
-    font-size: 1.75em;
-    font-family: 'Raleway', sans-serif;
-    margin-bottom: 25px;
+    font-size: 3.25em;
+    font-weight: 900;
+    margin: 30px 20px 30px 20px;
 }
 
 body > h3 {
-    font-size: 1.125em;
-    margin-bottom: 50px;
-    font-family: 'Open Sans', sans-serif;
-    font-style: italic;
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
-header > p {
-    font-size: 0.75em;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.subscribe {
-    background: rgba(0, 0, 0, 0.65);
-    display: table;
-    padding: 20px 20px 20px 20px;
-    margin: 0px auto 10px auto;
-    border-radius: 5px;
-}
-
-.subscribe input {
-    float: left;
-}
-
-.subscribe input[type="text"], input[type="email"] {
-    padding: 0;
+button {
+    margin: 5px 5px;
+    font-size: 2.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: #f9f9f9;
+    background-color: #000000;
     border: 0;
-    width: 320px;
-    margin-right: 10px;
-    font-family: 'Open Sans', sans-serif;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0);
+    color: #000000;
+    box-shadow: inset 0 0 0 3px #000000;
+    cursor: hand;
+}
+
+.startbutton {
+    margin: 30px auto;
+    width: 400px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+}
+
+.pagebutton {
+    margin: 5px 5px;
+    padding: 2px;
+    width: 25px;
     font-size: 1em;
-    padding: 12px 20px 13px 20px;
-    box-sizing: border-box;
-}
-
-.subscribe input[type="submit"] {
-    background: #ae2c52;
-    border: 0;
-    color: #fff;
-    font-size: 1.25em;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    padding: 10px 35px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-article {
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: 'Open Sans', sans-serif;
-    padding: 50px 20px;
-}
-
-article > h1 {
-    font-size: 3em;
+    font-weight: 400;
+    border-radius: 2px;
+    float: left;
     text-align: center;
-    margin-bottom: 25px;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
-article > p {
-    margin-bottom: 30px;
+.editbutton {
+    margin: 0 0 0 0;
+    width: 100%;
     font-size: 1em;
+    font-weight: 400;
+    border-radius: 0px;
+    float: left;
+    height: 22px;
 }
 
-.imgleft {
-    float: left;
-    margin: 0px 30px 20px 0px;
+#backbutton {
+    font-size: 0.85em;
+}
+
+.wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.buttonblock {
+    display: inline-block;
+    width: 220px;
+    margin-left: 20px;
+}
+
+.buttonblock input {
+    width: 100%;
+    margin: 15px 5px 3px;
+    border: solid 3px #000000;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.75em;
+}
+
+.tableblock {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+td, th {
+    border: 3px solid #000000;
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    vertical-align: middle;
+
+}
+
+th {
+    color: #f9f9f9;
+    background-color: black;
+    font-weight: 700;
+}
+
+.buttontd {
+    border: none;
+    padding-right: 5px;
+}
+
+#userdata {
+    margin: auto;
 }
 
 @media screen and (max-width: 955px) {
-    .subscribe input[type="text"], input[type="email"] {
+    .maintable input[type="text"], input[type="email"] {
         width: 260px;
     }
 }
 
 @media screen and (max-width: 840px) {
-    .subscribe input[type="text"], input[type="email"] {
+    .maintable input[type="text"], input[type="email"] {
         width: 320px;
         display: block;
         float: none;
@@ -215,23 +272,10 @@ article > p {
     header {
         padding: 30px 20px;
     }
-
-    header > h1 {
-        font-size: 2.75em;
-        font-family: 'Raleway', sans-serif;
-        margin-bottom: 20px;
-    }
-
-    header > h3 {
-        font-size: 1.125em;
-        margin-bottom: 25px;
-        font-family: 'Open Sans', sans-serif;
-        font-style: italic;
-    }
 }
 
 @media screen and (max-width: 400px) {
-    .subscribe input[type="text"], input[type="email"] {
+    .maintable input[type="text"], input[type="email"] {
         width: 240px;
     }
 }

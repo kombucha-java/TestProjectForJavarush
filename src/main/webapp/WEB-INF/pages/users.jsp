@@ -6,77 +6,110 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,700|Raleway:200,400" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css"/> "/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900|Nunito+Sans:400,700,900"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/> "/>
     <title>User List page ${currentPage}</title>
 </head>
 <body>
-<a href="../../index.jsp">Back to main menu</a>
-
-<br/>
-<br/>
-<h1><a href="<c:url value="/adduser"/>">Add User</a></h1>
-<h1>User list page ${currentPage}</h1>
-<c:url var="findUsers" value="/findusers"/>
-<c:if test="${!empty listUsers}">
-    <form:form action="${findUsers}" method="get">
-        <input type="text" name="searchKeyword" value=""/>
-        <input type="submit"
-               value="<spring:message text="Find users"/>"/>
-    </form:form>
-</c:if>
-<c:url value="/users/1" var="firstPage"/>
-<c:url value="/users/${totalPages}" var="lastPage"/>
-<c:url value="/users/${currentPage - 1}" var="prevPage"/>
-<c:url value="/users/${currentPage + 1}" var="nextPage"/>
-
-<c:if test="${!empty listUsers}">
-    <ul class="paging">
-        <c:if test="${!(currentPage == 1)}">
-            <li class="disabled"><a href="${firstPage}">&lt;&lt;</a></li>
-            <li class="disabled"><a href="${prevPage}">&lt;</a></li>
+<header>
+    <h1>User list</h1>
+</header>
+<div class="wrapper">
+    <div class="buttonblock">
+        <c:url var="findUsers" value="/findusers"/>
+        <c:if test="${!empty listUsers}">
+            <form:form action="${findUsers}" method="get">
+                <input type="text" name="searchKeyword" value="Enter user's name"/>
+                <button type="submit">Find users</button>
+            </form:form>
         </c:if>
-        <c:forEach var="i" begin="${startPage}" end="${endPage}">
-            <c:url var="pageUrl" value="/users/${i}"/>
-            <c:choose>
-                <c:when test="${i == currentPage}">
-                    <li class="active"><a href="${pageUrl}"><c:out value="${i}"/></a></li>
-                </c:when>
-                <c:otherwise>
-                    <li><a href="${pageUrl}"><c:out value="${i}"/></a></li>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:if test="${!(currentPage == totalPages)}">
-            <li class="disabled"><a href="${nextPage}">&gt;</a></li>
-            <li class="disabled"><a href="${lastPage}">&gt;&gt;</a></li>
+        <form action="/adduser">
+            <button type="submit">Add user</button>
+        </form>
+        <form action="../../index.jsp">
+            <button id="backbutton" type="submit">Back to main page</button>
+        </form>
+    </div>
+    <div class="tableblock">
+        <c:url value="/users/1" var="firstPage"/>
+        <c:url value="/users/${totalPages}" var="lastPage"/>
+        <c:url value="/users/${currentPage - 1}" var="prevPage"/>
+        <c:url value="/users/${currentPage + 1}" var="nextPage"/>
+
+        <c:if test="${!empty listUsers}">
+
+            <c:if test="${!(currentPage == 1)}">
+                <form action="${firstPage}">
+                    <button class="pagebutton" type="submit">&lt;&lt;</button>
+                </form>
+
+                <form action="${prevPage}">
+                    <button class="pagebutton" type="submit">&lt;</button>
+                </form>
+            </c:if>
+            <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                <c:url var="pageUrl" value="/users/${i}"/>
+                <c:choose>
+                    <c:when test="${i == currentPage}">
+                        <form action="${pageUrl}">
+                            <button class="pagebutton" type="submit"
+                                    style="text-decoration: underline; font-weight: 600">
+                                <c:out value="${i}"/>
+                            </button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form action="${pageUrl}">
+                            <button class="pagebutton" type="submit"><c:out value="${i}"/></button>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${!(currentPage == totalPages)}">
+                <form action="${nextPage}">
+                    <button class="pagebutton" type="submit">&gt;</button>
+                </form>
+                <form action="${lastPage}">
+                    <button class="pagebutton" type="submit">&gt;&gt;</button>
+                </form>
+            </c:if>
+
+            <table class="maintable" width="100%">
+                <tr>
+                    <th width="40">ID</th>
+                    <th width="130">User name</th>
+                    <th width="40">Age</th>
+                    <th width="60">IsAdmin</th>
+                    <th width="130">CreatedDate</th>
+                    <th width="80">Edit</th>
+                    <th width="80">Delete</th>
+                </tr>
+                <c:forEach items="${listUsers}" var="user">
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.age}</td>
+                        <td><c:out value="${user.admin? 'Yes' : 'No'}"/></td>
+                        <td>${user.createdDate}</td>
+                        <td>
+                            <form action="/edit/${user.id}">
+                                <button class="editbutton" type="submit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/remove/${user.id}">
+                                <button class="editbutton" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </c:if>
-    </ul>
-    <table class="tg">
-        <tr>
-            <th width="60">ID</th>
-            <th width="120">User name</th>
-            <th width="60">Age</th>
-            <th width="30">IsAdmin</th>
-            <th width="100">CreatedDate</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
-        </tr>
-        <c:forEach items="${listUsers}" var="user">
-            <tr>
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td>${user.age}</td>
-                <td><c:out value="${user.admin? 'Yes' : 'No'}"/></td>
-                <td>${user.createdDate}</td>
-                <td><a href="<c:url value="/edit/${user.id}"/> ">Edit</a></td>
-                <td><a href="<c:url value="/remove/${user.id}"/> ">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
-<c:if test="${empty listUsers}">
-    <h1>List is empty</h1>
-</c:if>
+        <c:if test="${empty listUsers}">
+            <h1>List is empty</h1>
+        </c:if>
+    </div>
+</div>
 </body>
 </html>
