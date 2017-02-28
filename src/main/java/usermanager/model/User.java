@@ -1,8 +1,13 @@
 package usermanager.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -14,9 +19,14 @@ public class User {
     private int id;
 
     @Column(name = "name")
+    @Size(min=5, max = 25)
+    @NotNull
+    @NotEmpty
     private String name;
 
     @Column(name = "age")
+    @Min(value = 18, message = "User must be over 18")
+    @NotNull
     private int age;
 
     @Column(name = "isAdmin")

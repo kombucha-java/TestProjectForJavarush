@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import usermanager.dao.UserDao;
 import usermanager.model.User;
 import usermanager.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -40,8 +42,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute(value = "user") User user, Model model) {
-        if (user.getId() == 0) {
+    public String addUser(@Valid @ModelAttribute(value = "user") User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult);
+            //user.setCreatedDate();
+            model.addAttribute("user", user);
+            return "userdata";
+        } else if (user.getId() == 0) {
             this.userService.addUser(user);
         } else this.userService.updateUser(user);
         model.addAttribute("listUsers", this.userService.listUsers(0));
@@ -69,7 +76,11 @@ public class UserController {
     @RequestMapping("findusers")
     public String findUsers(@RequestParam("searchKeyword") String searchKeyword, Model model) {
         model.addAttribute("listUsers", this.userService.findUsers(searchKeyword));
-        model.addAttribute("currentPage", 1);
         return "/users";
+    }
+
+    @RequestMapping(value = "cancel", method = RequestMethod.GET)
+    public String cancelUpdateUser() {
+        return "redirect:/users/1";
     }
 }

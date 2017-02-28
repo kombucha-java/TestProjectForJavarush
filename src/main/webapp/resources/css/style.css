@@ -206,9 +206,27 @@ button:hover {
     font-size: 0.85em;
 }
 
+html, body {
+    text-align: center;
+}
+
 .wrapper {
     text-align: center;
     width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.errors{
+    font-weight: 900;
+    color: red;
+}
+.flex-item {
+    flex:0 0 360px;
 }
 
 .buttonblock {
@@ -258,11 +276,13 @@ th {
     font-weight: 400;
     background-color: #feff9a;
 }
-.wrapper h1{
+
+.wrapper h1 {
     font-weight: 900;
     font-size: 2.75em;
     vertical-align: top;
 }
+
 @media screen and (max-width: 955px) {
     .maintable input[type="text"], input[type="email"] {
         width: 260px;
