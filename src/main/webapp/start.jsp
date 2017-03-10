@@ -14,7 +14,8 @@
     </div>
 </header>
 <h1 align="center">Simple CRUD application</h1>
-<form action="/users/1">
+<c:url var="users" value="/users/1"/>
+<form action="${users}">
     <button class="startbutton" type="submit">Try it free*</button>
 </form>
 <h3 align="center">*without registration or sms</h3>

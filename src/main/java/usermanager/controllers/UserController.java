@@ -83,4 +83,9 @@ public class UserController {
     public String cancelUpdateUser() {
         return "redirect:/users/1";
     }
+
+    @RequestMapping(value = "mainpage")
+    public String mainPage() {
+        return "../../start";
+    }
 }

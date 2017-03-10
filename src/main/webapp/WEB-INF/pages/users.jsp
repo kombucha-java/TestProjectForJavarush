@@ -18,15 +18,18 @@
 <div class="wrapper">
     <div class="buttonblock">
         <c:url var="findUsers" value="/findusers"/>
+        <c:url var="addUser" value="/adduser"/>
+
         <form:form action="${findUsers}" method="get">
             <input type="text" name="searchKeyword" placeholder="Enter user's name" class="editinput"/>
             <button type="submit">Find users</button>
         </form:form>
 
-        <form action="/adduser">
+        <form action="${addUser}">
             <button type="submit">Add user</button>
         </form>
-        <form action="../../index.jsp">
+        <c:url var="mainPage" value="/mainpage"/>
+        <form action="${mainPage}">
             <button id="backbutton" type="submit">Back to main page</button>
         </form>
     </div>
@@ -85,6 +88,9 @@
                     <th width="80">Delete</th>
                 </tr>
                 <c:forEach items="${listUsers}" var="user">
+                    <c:url var="removeUser" value="/remove/${user.id}"/>
+                    <c:url var="editUser" value="/edit/${user.id}" />
+
                     <tr>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
@@ -92,12 +98,12 @@
                         <td><c:out value="${user.admin? 'Yes' : 'No'}"/></td>
                         <td>${user.createdDate}</td>
                         <td>
-                            <form action="/edit/${user.id}">
+                            <form action="${editUser}">
                                 <button class="editbutton" type="submit">Edit</button>
                             </form>
                         </td>
                         <td>
-                            <form action="/remove/${user.id}">
+                            <form action="${removeUser}">
                                 <button class="editbutton" type="submit">Delete</button>
                             </form>
                         </td>

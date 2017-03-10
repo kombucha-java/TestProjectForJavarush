@@ -77,7 +77,8 @@
     <form:form action="${cancelAction}" method="get">
         <button type="submit">Cancel</button>
     </form:form>
-    <form action="../../index.jsp">
+    <c:url var="mainPage" value="/mainpage"/>
+    <form action="${mainPage}">
         <button id="backbutton" type="submit">Back to main page</button>
     </form>
 </div>
