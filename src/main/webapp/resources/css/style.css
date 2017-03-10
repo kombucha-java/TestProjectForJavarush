@@ -214,7 +214,21 @@ html, body {
     text-align: center;
     width: 100%;
 }
-
+.wrapper-data {
+    text-align: center;
+    width: 100%;
+    max-width: 490px;
+    margin: auto;
+}
+td>input {
+    max-width: 140px;
+}
+td>#age{
+    max-width: 60px;
+}
+td>#id{
+    max-width: 60px;
+}
 .flex-container {
     display: flex;
     justify-content: center;
@@ -224,6 +238,7 @@ html, body {
 .errors{
     font-weight: 900;
     color: red;
+    max-width: 140px;
 }
 .flex-item {
     flex:0 0 360px;
@@ -283,28 +298,3 @@ th {
     vertical-align: top;
 }
 
-@media screen and (max-width: 955px) {
-    .maintable input[type="text"], input[type="email"] {
-        width: 260px;
-    }
-}
-
-@media screen and (max-width: 840px) {
-    .maintable input[type="text"], input[type="email"] {
-        width: 320px;
-        display: block;
-        float: none;
-        margin-bottom: 10px;
-        margin-right: 0px;
-    }
-
-    header {
-        padding: 30px 20px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .maintable input[type="text"], input[type="email"] {
-        width: 240px;
-    }
-}

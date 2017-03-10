@@ -16,7 +16,7 @@
 <header>
     <h1>User Details</h1>
 </header>
-<div class="wrapper">
+<div class="wrapper-data">
     <c:url var="cancelAction" value="/cancel"/>
     <c:url var="addAction" value="/users/add"/>
     <form:form action="${addAction}" commandName="user">
